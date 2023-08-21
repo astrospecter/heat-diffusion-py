@@ -22,23 +22,26 @@ class HeatMatrix():
         self.time = 0
 
     def init_heat_source(self, source_temp, source_x, source_y, size):
-        """Saves heat source information to the object."""
-        self.source_temp = source_temp
-        self.source_x = source_x
-        self.source_y = source_y
-        self.source_size = size
-
-    def add_heat_source(self):
         """
-            Adds a heat source to the temperature matrix.
-
+            Saves heat source information to the object.
+            
             Args:
             - source_temp: the temperature of the heat source
             - source_x: the x-coordinate of the center of the heat source
             - source_y: the y-coordinate of the center of the heat source
             - size: the size of the heat source
         """
-        pass
+        self.source_temp = source_temp
+        self.source_x = source_x
+        self.source_y = source_y
+        self.source_size = size
+
+    def add_heat_source(self):
+        """Adds a heat source to the temperature matrix."""
+        for i in range(self.source_x - self.source_size, self.source_x + self.source_size):
+            for j in range(self.source_y - self.source_size, self.source_y + self.source_size):
+                if i > 0 and i < self.temp_xlen and j > 0 and j < self.temp_ylen:
+                    self.temp[i,j] = self.source_temp
 
     def diffuse(self):
         """Diffuses the HeatMatrix object according to the diffusion equation one time step."""
