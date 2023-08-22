@@ -9,8 +9,8 @@ print("2D heat equation solver")
 plate_length = 50
 max_iter_time = 200
 
-alpha = 2
-delta_x = 1
+alpha = 2 # this should be able to be changed
+delta_x = 1 # this should be a constant
 
 delta_t = (delta_x ** 2)/(4 * alpha)
 gamma = (alpha * delta_t) / (delta_x ** 2)

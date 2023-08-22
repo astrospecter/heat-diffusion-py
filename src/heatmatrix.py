@@ -18,6 +18,39 @@ def set_heat_source(temp_matrix, source_temp, x, y):
     temp_matrix[x][y] = source_temp
     return temp_matrix
 
+def temp_to_rgba(temp_matrix, size_x, size_y):
+    rgba = []
+    for i in range(size_x):
+        for j in range(size_y):
+            curr_color = temp_matrix[i][j]
+            if curr_color > 150 and curr_color <= 200:
+                r = 255
+                g = (200 - curr_color) * (255 / 50)
+                b = 0
+            elif curr_color > 100 and curr_color <= 150:
+                r = (curr_color - 100) * (255 / 50)
+                g = 255
+                b = 0
+            elif curr_color > 50 and curr_color <= 100:
+                r = 0
+                g = 255
+                b = (100 - curr_color) * (255/50)
+            elif curr_color > 0 and curr_color <= 50:
+                r = 0
+                g = curr_color * (255/50)
+                b = 255
+            elif curr_color > 200:
+                r = 255
+                g = 255
+                b = 255
+            else:
+                r = 0
+                g = 0
+                b = 0
+            rgba.extend([r,g,b,255])
+    return rgba
+
+# for debugging
 def plotheatmap(u_k, k, delta_t):
     # Clear the current plot figure
     plt.clf()
